@@ -1,6 +1,6 @@
+import 'package:coba_flutter/pages/daftar_page.dart';
 import 'package:coba_flutter/pages/login_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class Homepage extends StatelessWidget {
   const Homepage({super.key});
@@ -13,30 +13,30 @@ class Homepage extends StatelessWidget {
           alignment: Alignment.center,
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 95,
               ),
               Image.asset("assets/images/im_landing.png"),
-              SizedBox(
+              const SizedBox(
                 height: 35,
               ),
               Container(
                 padding: const EdgeInsets.only(right: 49, left: 52),
-                child: Text(
+                child: const Text(
                   "Hai orang baik. Selamat datang di aplikasi Bank Sampah Sidomulyo 123 !",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20, fontFamily: 'Imprima'),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 35,
               ),
-              Container(
+              SizedBox(
                   width: 260,
                   height: 60,
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      backgroundColor: Color(0xff65E096),
+                      backgroundColor: const Color(0xff65E096),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
@@ -45,10 +45,11 @@ class Homepage extends StatelessWidget {
                       Navigator.push(
                         context,
                         // DetailPage adalah halaman yang dituju
-                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        MaterialPageRoute(
+                            builder: (context) => const LoginPage()),
                       );
                     },
-                    child: Text(
+                    child: const Text(
                       "Masuk",
                       style: TextStyle(
                           color: Color(0xffffffff),
@@ -56,21 +57,28 @@ class Homepage extends StatelessWidget {
                           fontFamily: 'Imprima'),
                     ),
                   )),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
-              Container(
+              SizedBox(
                   width: 260,
                   height: 60,
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      backgroundColor: Color(0xffC3D9CC),
+                      backgroundColor: const Color(0xffC3D9CC),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
-                    onPressed: () {},
-                    child: Text(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        // DetailPage adalah halaman yang dituju
+                        MaterialPageRoute(
+                            builder: (context) => const DaftarDiri()),
+                      );
+                    },
+                    child: const Text(
                       "Daftar",
                       style: TextStyle(
                           color: Color(0xffffffff),
