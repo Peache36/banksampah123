@@ -75,4 +75,4 @@ const getRubbishById = async (req,res) => {
     }
 }
 
-module.exports = {addRubbish,editRubbish,getAllRubbish,getRubbishById}
+module.exports = {addRubbish,editRubbish,getAllRubbish,getRubbishById,deleteRubbish}
