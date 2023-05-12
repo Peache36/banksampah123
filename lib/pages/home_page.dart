@@ -1,6 +1,7 @@
 import 'package:coba_flutter/pages/daftar_page.dart';
 import 'package:coba_flutter/pages/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
@@ -22,10 +23,15 @@ class LandingPage extends StatelessWidget {
               ),
               Container(
                 padding: const EdgeInsets.only(right: 49, left: 52),
-                child: const Text(
+                child: Text(
                   "Hai orang baik. Selamat datang di aplikasi Bank Sampah Sidomulyo 123 !",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20, fontFamily: 'Imprima'),
+                  style: GoogleFonts.montserrat(
+                    textStyle: TextStyle(
+                      fontSize: 15,
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(
@@ -49,12 +55,15 @@ class LandingPage extends StatelessWidget {
                             builder: (context) => const LoginPage()),
                       );
                     },
-                    child: const Text(
+                    child: Text(
                       "Masuk",
-                      style: TextStyle(
-                          color: Color(0xffffffff),
-                          fontSize: 30,
-                          fontFamily: 'Imprima'),
+                      style: GoogleFonts.montserrat(
+                        textStyle: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   )),
               const SizedBox(
@@ -78,12 +87,15 @@ class LandingPage extends StatelessWidget {
                             builder: (context) => const DaftarDiri()),
                       );
                     },
-                    child: const Text(
+                    child: Text(
                       "Daftar",
-                      style: TextStyle(
-                          color: Color(0xffffffff),
-                          fontSize: 30,
-                          fontFamily: 'Imprima'),
+                      style: GoogleFonts.montserrat(
+                        textStyle: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ))
             ],
