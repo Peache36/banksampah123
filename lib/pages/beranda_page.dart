@@ -1,4 +1,5 @@
 import 'package:coba_flutter/pages/daftar_page.dart';
+import 'package:coba_flutter/pages/setting_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -24,11 +25,11 @@ class HomePage extends StatelessWidget {
         leading: const Icon(Icons.person),
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.notifications, color: Colors.white),
+            icon: const Icon(Icons.settings, color: Colors.white),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const HomePage()),
+                MaterialPageRoute(builder: (context) => const SettingProfile()),
               );
             },
           ),
