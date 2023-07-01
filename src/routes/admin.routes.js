@@ -1,8 +1,12 @@
-const router = require('express').Router()
-const { getAllRubbish, getRubbishById, addRubbish, editRubbish, deleteRubbish } = require('../controller/admin.controller')
+const adminRouter = require('express').Router()
+const { getAllRubbish, getRubbishById, addRubbish, editRubbish, deleteRubbish, depositRubbish } = require('../controller/admin.controller')
+const { verifyTokenAdmin } = require('../middleware/verifyToken')
 
-router.get('/',getAllRubbish)
-router.get('/:id',getRubbishById)
-router.post('/create',addRubbish)
-router.put('/:id',editRubbish)
-router.delete('/:id',deleteRubbish)
+adminRouter.get('/',getAllRubbish)
+adminRouter.get('/:id',getRubbishById)
+adminRouter.post('/rubbish/add',verifyTokenAdmin,addRubbish)
+adminRouter.put('/rubbish/:id',verifyTokenAdmin,editRubbish)
+adminRouter.delete('/rubbish/:id',verifyTokenAdmin,deleteRubbish)
+adminRouter.post('/rubbish-deposit/:id',verifyTokenAdmin,depositRubbish)
+
+module.exports = adminRouter

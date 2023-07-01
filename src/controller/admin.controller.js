@@ -10,6 +10,7 @@ const addRubbish = async(req,res) => {
         })
         return res.status(201).json({"status" : "success", data : newRubbish})
     } catch (error) {
+        console.log(error)
         return res.status(500).json({"status" : "fail", message : error})
     }
 }
@@ -20,7 +21,7 @@ const editRubbish = async(req,res) => {
     try {
         const updateRubbish = await prisma.rubbish.update({
             where : {
-                id : id
+                id : parseInt(id)
             }, 
             data : {
                 unit : unit,
@@ -29,23 +30,24 @@ const editRubbish = async(req,res) => {
         })
         return res.status(200).json({status : "success", data : updateRubbish})
     } catch (error) {
-        return req.status(500).json({status: "fail", message: error})
+        console.log(error)
+        return res.status(500).json({status: "fail", message: error})
     }
 }
 
 const deleteRubbish = async(req,res) => {
     const {id} = req.params
     try {
-        const deletedRubbish = await prisma.rubbish.delete({
+        await prisma.rubbish.delete({
             where : {
-                id : id
+                id : parseInt(id)
             }
         }) 
         return res.status(200).json({
             status : "success"
         })
     } catch (error) {
-        return req.status(500).json({status: "fail", message: error})
+        return res.status(500).json({status: "fail", message: error})
         
     }
 }
@@ -55,9 +57,13 @@ const getAllRubbish = async (req,res) => {
         const allRubbish = await prisma.rubbish.findMany()
         return res.status(200).json({status: "success", data: allRubbish})
     } catch (error) {
-        return req.status(500).json({status: "fail", message: error})
+        return res.status(500).json({status: "fail", message: error})
         
     }
+}
+
+const deleteUser = async(req,res) => {
+    const {userId} = req.body
 }
 
 const getRubbishById = async (req,res) => {
@@ -65,14 +71,46 @@ const getRubbishById = async (req,res) => {
     try {
         const rubbish = await prisma.rubbish.findUnique({
             where : {
-                id : id
+                id : parseInt(id)
             }
         })
         return res.status(200).json({status: "success", data: rubbish})
     } catch (error) {
-        return req.status(500).json({status: "fail", message: error})
+        return res.status(500).json({status: "fail", message: error})
         
     }
 }
 
-module.exports = {addRubbish,editRubbish,getAllRubbish,getRubbishById,deleteRubbish}
+const depositRubbish = async (req,res) => {
+    const {rubbishList} = req.body
+    const {id} = req.params
+    try {
+        const deposit = await prisma.deposit.create({
+            data : {
+                user : {
+                    connect :{
+                        id : parseInt(id)
+                    }
+                },    
+                rubbish : {
+                    create : rubbishList.split(',').map((id) => ({
+                        rubbish : {
+                            connect : {
+                                id : parseInt(id)
+                            }
+                        }
+                    }))
+                }
+            },
+            include : {
+                rubbish : true
+            }
+        })
+        return res.status(201).json({status : 'success', data: deposit})
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({status: 'fail', message : error})
+    }
+}
+
+module.exports = {addRubbish,editRubbish,depositRubbish,getAllRubbish,getRubbishById,deleteRubbish}
