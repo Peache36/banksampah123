@@ -6,10 +6,33 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "postgres"
   url      = env("DATABASE_URL")
 }
 
+
+model DataUser {
+  id Int @id @default(autoincrement())
+  firebaseId String
+  name String
+  role Role @default(user)
+  profile Profile?
+}
+
+enum Role {
+  user
+  admin
+}
+
+model Profile {
+  id Int @id @default(autoincrement())
+  user DataUser @relation(fields: [userId],references: [id])
+  userId Int @unique
+  address String
+  phoneNumber String
+  point Int
+  photo String
+}
 
 model Rubbish {
   id Int @id @default(autoincrement())
