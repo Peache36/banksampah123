@@ -727,6 +727,394 @@ Response Body:
 }
 ```
 
+Certainly! Here's the documentation for the `makePost` endpoint:
+
+## Make Post
+
+The `makePost` endpoint is used to create a new post.
+
+### Endpoint
+
+```
+POST /post/make-post
+```
+
+### Request Body
+
+The request body should contain the following information:
+
+| Field   | Type   | Description                     |
+|---------|--------|---------------------------------|
+| title   | string | The title of the post           |
+| content | string | The content of the post         |
+
+### Response
+
+- Success: Returns the newly created post.
+
+```
+Status: 201 Created
+```
+
+```json
+{
+  "status": "success",
+  "data": {
+    "id": 123,
+    "title": "Example Post",
+    "content": "This is an example post",
+    "photo": "",
+    "user": {
+      "id": 456,
+      "name": "John Doe",
+      "email": "john@example.com"
+    },
+    "createdAt": "2023-07-01T12:34:56Z",
+    "updatedAt": "2023-07-01T12:34:56Z"
+  }
+}
+```
+
+- Failure: Returns an error message indicating the cause of the failure.
+
+```
+Status: 500 Internal Server Error
+```
+
+```json
+{
+  "status": "fail",
+  "message": "Internal server error"
+}
+```
+
+### Example Usage
+
+```
+POST http://localhost:3001/post/make-post
+```
+
+Request Body:
+```json
+{
+  "title": "Example Post",
+  "content": "This is an example post"
+}
+```
+
+Response Body:
+```json
+{
+  "status": "success",
+  "data": {
+    "id": 123,
+    "title": "Example Post",
+    "content": "This is an example post",
+    "photo": "",
+    "user": {
+      "id": 456,
+      "name": "John Doe",
+      "email": "john@example.com"
+    },
+    "createdAt": "2023-07-01T12:34:56Z",
+    "updatedAt": "2023-07-01T12:34:56Z"
+  }
+}
+```
+## Get All Posts
+
+The `getAllPost` endpoint is used to retrieve all posts along with their comments.
+
+### Endpoint
+
+```
+GET /post/
+```
+
+### Response
+
+- Success: Returns an array of all posts with their comments.
+
+```
+Status: 200 OK
+```
+
+```json
+{
+  "status": "success",
+  "data": [
+    {
+      "id": 123,
+      "title": "Example Post 1",
+      "content": "This is an example post 1",
+      "photo": "",
+      "user": {
+        "id": 456,
+        "name": "John Doe",
+        "email": "john@example.com"
+      },
+      "comments": [
+        {
+          "id": 1,
+          "content": "Comment 1",
+          "user": {
+            "id": 789,
+            "name": "Jane Smith",
+            "email": "jane@example.com"
+          }
+        },
+        {
+          "id": 2,
+          "content": "Comment 2",
+          "user": {
+            "id": 890,
+            "name": "Alice Johnson",
+            "email": "alice@example.com"
+          }
+        }
+      ],
+      "createdAt": "2023-07-01T12:34:56Z",
+      "updatedAt": "2023-07-01T12:34:56Z"
+    },
+    {
+      "id": 456,
+      "title": "Example Post 2",
+      "content": "This is an example post 2",
+      "photo": "",
+      "user": {
+        "id": 789,
+        "name": "Jane Smith",
+        "email": "jane@example.com"
+      },
+      "comments": [
+        {
+          "id": 3,
+          "content": "Comment 3",
+          "user": {
+            "id": 890,
+            "name": "Alice Johnson",
+            "email": "alice@example.com"
+          }
+        },
+        {
+          "id": 4,
+          "content": "Comment 4",
+          "user": {
+            "id": 123,
+            "name": "John Doe",
+            "email": "john@example.com"
+          }
+        }
+      ],
+      "createdAt": "2023-07-02T09:12:34Z",
+      "updatedAt": "2023-07-02T09:12:34Z"
+    }
+  ]
+}
+```
+
+- Failure: Returns an error message indicating the cause of the failure.
+
+```
+Status: 500 Internal Server Error
+```
+
+```json
+{
+  "status": "fail",
+  "message": "Internal server error"
+}
+```
+
+### Example Usage
+
+```
+GET http://localhost:3001/all-posts
+```
+
+Response Body:
+```json
+{
+  "status": "success",
+  "data": [
+    {
+      "id": 123,
+      "title": "Example Post 1",
+      "content": "This is an example post 1",
+      "photo": "",
+      "user": {
+        "id": 456,
+        "name": "John Doe",
+        "email": "john@example.com"
+      },
+      "comments": [
+        {
+          "id": 1,
+          "content": "Comment 1",
+          "user": {
+            "id": 789,
+            "name": "Jane Smith",
+            "email": "jane@example.com"
+          }
+        },
+        {
+          "id": 2,
+          "content": "Comment 2",
+          "user": {
+            "
+
+id": 890,
+            "name": "Alice Johnson",
+            "email": "alice@example.com"
+          }
+        }
+      ],
+      "createdAt": "2023-07-01T12:34:56Z",
+      "updatedAt": "2023-07-01T12:34:56Z"
+    },
+    {
+      "id": 456,
+      "title": "Example Post 2",
+      "content": "This is an example post 2",
+      "photo": "",
+      "user": {
+        "id": 789,
+        "name": "Jane Smith",
+        "email": "jane@example.com"
+      },
+      "comments": [
+        {
+          "id": 3,
+          "content": "Comment 3",
+          "user": {
+            "id": 890,
+            "name": "Alice Johnson",
+            "email": "alice@example.com"
+          }
+        },
+        {
+          "id": 4,
+          "content": "Comment 4",
+          "user": {
+            "id": 123,
+            "name": "John Doe",
+            "email": "john@example.com"
+          }
+        }
+      ],
+      "createdAt": "2023-07-02T09:12:34Z",
+      "updatedAt": "2023-07-02T09:12:34Z"
+    }
+  ]
+}
+```
+## Make a Comment
+
+The `makeAcomment` endpoint is used to add a comment to a post.
+
+### Endpoint
+
+```
+POST /post/:postId/comment
+```
+
+- `:postId`: The ID of the post.
+
+### Request Parameters
+
+| Parameter | Type   | Description           |
+|-----------|--------|-----------------------|
+| postId    | number | The ID of the post     |
+
+### Request Body
+
+The request body should contain the following information:
+
+| Field   | Type   | Description                       |
+|---------|--------|-----------------------------------|
+| content | string | The content of the comment         |
+
+### Response
+
+- Success: Returns the created comment.
+
+```
+Status: 201 Created
+```
+
+```json
+{
+  "status": "success",
+  "data": {
+    "id": 1,
+    "content": "This is a comment",
+    "user": {
+      "id": 123,
+      "name": "John Doe",
+      "email": "john@example.com"
+    },
+    "post": {
+      "id": 456,
+      "title": "Example Post",
+      "content": "This is an example post",
+      "photo": ""
+    },
+    "createdAt": "2023-07-01T12:34:56Z",
+    "updatedAt": "2023-07-01T12:34:56Z"
+  }
+}
+```
+
+- Failure: Returns an error message indicating the cause of the failure.
+
+```
+Status: 500 Internal Server Error
+```
+
+```json
+{
+  "status": "fail",
+  "message": "Internal server error"
+}
+```
+
+### Example Usage
+
+```
+POST http://localhost:3001/post/456/comment
+```
+
+Request Body:
+```json
+{
+  "content": "This is a comment"
+}
+```
+
+Response Body:
+```json
+{
+  "status": "success",
+  "data": {
+    "id": 1,
+    "content": "This is a comment",
+    "user": {
+      "id": 123,
+      "name": "John Doe",
+      "email": "john@example.com"
+    },
+    "post": {
+      "id": 456,
+      "title": "Example Post",
+      "content": "This is an example post",
+      "photo": ""
+    },
+    "createdAt": "2023-07-01T12:34:56Z",
+    "updatedAt": "2023-07-01T12:34:56Z"
+  }
+}
+```
+
 ## Contributing
 Guidelines for contributing to the project.
 
