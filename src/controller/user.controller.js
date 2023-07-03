@@ -1,4 +1,4 @@
-const {createUserWithEmailAndPassword,getAuth,signInWithEmailAndPassword} = require('firebase/auth')
+const {createUserWithEmailAndPassword,getAuth,signInWithEmailAndPassword, sendPasswordResetEmail} = require('firebase/auth')
 const {app} = require('../utils/firebase.utils');
 const prisma = require('../database/prisma.database');
 const auth = getAuth(app)
@@ -86,9 +86,23 @@ const uploudPhoto = async(req,res) => {
   }
 }
 
+const userHistory = async(req,res) => {
+
+}
+
+
+const userResetPassword = async(req,res) => {
+  const {email} = req.body
+  sendPasswordResetEmail(auth,email).then(() => {
+      res.status(200).json({status : 'success', message : "Password Reset Email Sent"})
+  }).catch((error) => {
+    res.status(error.code).json({status:'fail' , message : error.message})
+  }) 
+
+
+}
 
 
 
 
-
-module.exports = {signUp,signIn,uploudPhoto}
+module.exports = {signUp,signIn,uploudPhoto,userResetPassword}

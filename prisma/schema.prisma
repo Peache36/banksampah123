@@ -13,16 +13,42 @@ datasource db {
 
 model DataUser {
   id Int @id @default(autoincrement())
-  firebaseId String
+  firebaseId String @unique
   name String
   role Role @default(user)
   profile Profile?
-  deposit Deposit[] 
+  deposit Deposit[]
+  posts Post[] 
+  comments Comment[]
 }
 
 enum Role {
   user
   admin
+}
+
+model Post {
+  id Int @id @default(autoincrement())
+  title String
+  content String
+  photo String
+  user DataUser @relation(fields: [userId],references: [id], onDelete: Cascade)
+  userId Int
+  like Int @default(0)
+  createAt DateTime @default(now())
+  updateAt DateTime @default(now())
+  comments Comment[]
+}
+
+model Comment {
+  id Int @id @default(autoincrement())
+  content String
+  post Post @relation(fields: [postId],references: [id], onDelete: Cascade)
+  postId Int
+  createAt DateTime @default(now())
+  updateAt DateTime @default(now())
+  user DataUser @relation(fields: [userId],references: [id],onDelete: Cascade)
+  userId Int
 }
 
 model Profile {
@@ -32,6 +58,7 @@ model Profile {
   address String
   phoneNumber String
   point Int
+  socketId String?
   photo String
 }
 
